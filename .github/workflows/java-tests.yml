@@ -1,28 +1,8 @@
-name: Java CI with JUnit
-
-on:
-  pull_request:
-  push:
-
-jobs:
-  build-and-test:
-    runs-on: windows-latest
-
-    steps:
-    - name: Checkout repository
-      uses: actions/checkout@v3
-
-    - name: Set up Java
-      uses: actions/setup-java@v3
-      with:
-        distribution: 'temurin'
-        java-version: '17'
-
-    - name: Compile Java files
-      run: |
-        mkdir out
-        javac -cp junit-platform-console-standalone-1.10.0.jar -d out App.java src/AppTest.java src/main/java/com/gimenes/Example.java src/test/java/com/gimenes/ExampleTest.java
-
-    - name: Run JUnit tests
-      run: |
-        java -jar junit-platform-console-standalone-1.10.0.jar -cp out --scan-class-path
+- name: Compile Java files
+  run: |
+    mkdir -p out
+    javac -cp junit-platform-console-standalone-1.10.0.jar -d out \
+      App.java \
+      src/AppTest.java \
+      src/main/java/com/gimenes/Example.java \
+      src/test/java/com/gimenes/ExampleTest.java
