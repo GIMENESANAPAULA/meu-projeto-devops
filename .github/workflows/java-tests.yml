@@ -1,3 +1,8 @@
-git add .github\workflows\java-tests.yml
-git commit -m "Add workflow to compile and run JUnit tests"
-git push origin sua-branch
+- name: Compile Java files
+  run: |
+    mkdir -p out
+    javac -cp junit-platform-console-standalone-1.10.0.jar -d out \
+      App.java \
+      src/AppTest.java \
+      src/main/java/com/gimenes/Example.java \
+      src/test/java/com/gimenes/ExampleTest.java
