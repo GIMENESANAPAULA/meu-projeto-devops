@@ -1,8 +1,12 @@
 name: Java CI with JUnit
 
 on:
-  pull_request:        # executa a cada PR
-  push:               # opcional: executa a cada push na branch
+  push:
+    branches:
+      - desenvolvimento
+  pull_request:
+    branches:
+      - desenvolvimento
 
 jobs:
   build-and-test:
@@ -16,7 +20,7 @@ jobs:
       uses: actions/setup-java@v3
       with:
         distribution: 'temurin'
-        java-version: '17'  # ou sua versão do Java
+        java-version: '17'
 
     - name: Compile Java files
       run: |
