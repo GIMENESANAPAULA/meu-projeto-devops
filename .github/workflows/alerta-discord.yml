@@ -5,6 +5,7 @@ on:
     branches:
       - main
       - desenvolvimento
+  workflow_dispatch: # permite rodar manualmente pelo GitHub Actions
 
 jobs:
   notify:
@@ -12,6 +13,13 @@ jobs:
     steps:
       - name: Enviar alerta para Discord
         uses: Ilshidur/action-discord@master
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
         with:
-          webhook: ${{ secrets.DISCORD_WEBHOOK }}
-          args: "Novo commit no repositório **${{ github.repository }}** no branch **${{ github.ref_name }}** pelo autor **${{ github.actor }}**. Mensagem: ${{ github.event.head_commit.message }}"
+          args: |
+            📢 **Novo commit**
+            Repositório: ${{ github.repository }}
+            Branch: ${{ github.ref_name }}
+            Autor: ${{ github.actor }}
+            Mensagem: ${{ github.event.head_commit.message }}
+            Commit: ${{ github.server_url }}/${{ github.repository }}/commit/${{ github.sha }}
