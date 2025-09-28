@@ -1,22 +1,17 @@
-name: Alerta Discord
+name: Enviar alertas para Discord
 
 on:
   push:
     branches:
       - main
-  pull_request:
-    types: [closed]
+      - desenvolvimento
 
 jobs:
-  alerta-discord:
+  notify:
     runs-on: ubuntu-latest
     steps:
       - name: Enviar alerta para Discord
         uses: Ilshidur/action-discord@master
         with:
           webhook: ${{ secrets.DISCORD_WEBHOOK }}
-          message: |
-            🚀 Novo push/merge detectado no repositório!
-            📁 Repositório: ${{ github.repository }}
-            👤 Autor: ${{ github.actor }}
-            🔗 Link: https://github.com/${{ github.repository }}/commit/${{ github.sha }}
+          args: "Novo commit no repositório **${{ github.repository }}** no branch **${{ github.ref_name }}** pelo autor **${{ github.actor }}**. Mensagem: ${{ github.event.head_commit.message }}"
