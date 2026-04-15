@@ -1,18 +1,28 @@
-name: Enviar alertas para Discord
+name: Alerta Discord
 
 on:
   push:
     branches:
-      - main
-      - desenvolvimento
+      - principal
+  workflow_dispatch:
 
 jobs:
   notify:
     runs-on: ubuntu-latest
+
     steps:
       - name: Enviar alerta para Discord
         uses: Ilshidur/action-discord@master
         env:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
         with:
-          args: "📢 Novo commit no repositório **${{ github.repository }}** no branch **${{ github.ref_name }}**. Autor: **${{ github.actor }}**. Mensagem: ${{ github.event.head_commit.message }}"
+          args: |
+            🚀 **Novo commit realizado!**
+
+             Repositório: ${{ github.repository }}
+             Branch: ${{ github.ref_name }}
+             Autor: ${{ github.actor }}
+             Mensagem: ${{ github.event.head_commit.message }}
+
+             Commit:
+            ${{ github.server_url }}/${{ github.repository }}/commit/${{ github.sha }}
