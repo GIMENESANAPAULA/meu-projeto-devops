@@ -18,12 +18,12 @@ jobs:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
         with:
           args: |
-            🚀 **Novo commit realizado!**
+            Novo commit realizado
 
-             Repositório: ${{ github.repository }}
-             Branch: ${{ github.ref_name }}
-             Autor: ${{ github.actor }}
-             Mensagem: ${{ github.event.head_commit.message }}
+            Repositorio: ${{ github.repository }}
+            Branch: ${{ github.ref_name }}
+            Autor: ${{ github.actor }}
+            Mensagem: ${{ github.event.head_commit.message }}
 
-             Commit:
+            Commit:
             ${{ github.server_url }}/${{ github.repository }}/commit/${{ github.sha }}
